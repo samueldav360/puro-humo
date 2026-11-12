@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PURO HUMO — Haven · Edición II</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+:root{--bg:#0b0908;--panel:#15110e;--panel2:#1c1611;--gold:#c6a15b;--gold2:#e6d2a5;--muted:#9a8768;--line:#594329;--text:#eee5d6;--red:#bd6548;--green:#8eaa78}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0%,#24190e 0%,#0b0908 46%);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}
+.shell{display:grid;grid-template-columns:246px 1fr;min-height:100vh}
+.sidebar{border-right:1px solid #4a3822;background:rgba(10,8,7,.94);padding:26px 17px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{text-align:center;padding:12px 8px 25px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.brand-mark{font-family:'Cinzel';font-size:42px;color:var(--gold);border:1px solid var(--gold);width:62px;height:62px;margin:0 auto 12px;display:grid;place-items:center;transform:rotate(45deg)}
+.brand-mark span{transform:rotate(-45deg)}
+.brand-name{font:500 25px 'Cinzel';letter-spacing:6px;color:var(--gold2)}
+.brand-tag{font:11px 'Cormorant Garamond';letter-spacing:2px;color:var(--muted);margin-top:8px}
+.nav{display:grid;gap:7px}.nav button{border:1px solid transparent;background:transparent;color:#b9a88c;text-align:left;padding:13px 14px;border-radius:8px;display:flex;gap:13px;align-items:center;transition:.2s}
+.nav button:hover,.nav button.active{background:linear-gradient(90deg,#3b2a17,#17110c);border-color:#6e512d;color:var(--gold2)}
+.nav .ico{width:22px;text-align:center;color:var(--gold);font-size:17px}
+.sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding:20px 8px 0;text-align:center;color:var(--muted);font:12px 'Cormorant Garamond';letter-spacing:2px}
+.main{min-width:0;padding:28px clamp(18px,4vw,58px) 55px;max-width:1500px;width:100%;margin:auto}
+.topbar{display:flex;justify-content:flex-end;gap:12px;align-items:center;margin-bottom:30px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:#120e0b;padding:9px 14px;border-radius:30px;color:var(--gold2);font-size:13px}
+.pill strong{color:var(--gold);font-weight:600}
+select,.field{background:#100d0a;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:11px 12px;width:100%;outline:none}
+select:focus,.field:focus{border-color:var(--gold)}
+.hero{min-height:205px;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line);margin-bottom:25px;padding:10px 0 28px}
+.hero:after{content:"H";position:absolute;right:8%;top:-58px;font:260px 'Cinzel';color:rgba(198,161,91,.055);pointer-events:none}
+.eyebrow{color:var(--gold);letter-spacing:3px;font-size:10px;text-transform:uppercase}
+h1{font:400 clamp(42px,6vw,72px) 'Cinzel';letter-spacing:5px;color:var(--gold2);margin:10px 0 0}
+.subtitle{font:italic 24px 'Cormorant Garamond';color:#c4ae86;margin-top:5px}
+.small-note{color:var(--muted);font-size:12px;margin-top:15px}
+.section{display:none;animation:fade .25s ease}.section.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+.grid{display:grid;gap:17px}.stats{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:20px}.two{grid-template-columns:1.05fr 1.45fr}.bottom{grid-template-columns:1fr 1.35fr;margin-top:17px}
+.card{background:linear-gradient(145deg,rgba(30,23,17,.96),rgba(14,11,9,.97));border:1px solid var(--line);border-radius:11px;padding:19px;position:relative;overflow:hidden;box-shadow:0 12px 35px #0005}
+.card:before{content:"";position:absolute;inset:5px;border:1px solid rgba(198,161,91,.12);border-radius:7px;pointer-events:none}
+.stat{display:flex;gap:15px;align-items:center;min-height:98px}.stat-icon{font-size:27px;color:var(--gold)}.stat-label{font:16px 'Cormorant Garamond';color:#b9a584}.stat-value{font:30px 'Cinzel';color:var(--gold2);margin-top:3px}
+.card-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px}
+h2{font:500 21px 'Cormorant Garamond';color:var(--gold2);margin:0}
+h3{font:500 18px 'Cormorant Garamond';color:var(--gold2);margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.btn{background:linear-gradient(135deg,#d4b16e,#8b642f);color:#160f08;border:1px solid #e0c184;border-radius:6px;padding:10px 16px;font-weight:700;font-size:12px;letter-spacing:.5px;box-shadow:0 4px 14px #0005}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn.secondary{background:transparent;color:var(--gold2);box-shadow:none;border-color:var(--line)}.btn.danger{background:#4a2119;color:#f1c6b7;border-color:#874b38}
+.challenge{display:flex;gap:14px;align-items:center;background:#100d0b;border:1px solid #493721;padding:13px;border-radius:8px}
+.challenge-art{width:88px;height:88px;flex:none;border:1px solid #77552d;border-radius:7px;display:grid;place-items:center;font-size:35px;background:radial-gradient(circle,#61431f,#1a120c 70%)}
+.reward{color:var(--gold);font-weight:700;margin:9px 0;font-size:14px}
+.auction-art{min-height:190px;background:linear-gradient(90deg,#120e0b 5%,#120e0b99 48%,#120e0b22),radial-gradient(circle at 75% 50%,#67431f,#19110a 55%,#0c0907);display:flex;align-items:center;padding:22px;position:relative}
+.auction-art:after{content:"⚖";position:absolute;right:10%;font-size:100px;color:#c69a55;opacity:.55}
+.status{font-size:11px;border:1px solid var(--line);border-radius:30px;padding:7px 11px;color:var(--gold2)}
+.history-row{display:grid;grid-template-columns:24px 1fr auto;gap:9px;padding:11px 0;border-bottom:1px solid #352719;font-size:13px;align-items:center}
+.positive{color:var(--green)}.negative{color:var(--red)}
+.page-title{font:400 34px 'Cinzel';color:var(--gold2);margin:4px 0 7px}.page-intro{color:var(--muted);font:italic 18px 'Cormorant Garamond';margin-bottom:23px}
+.cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.game-card{min-height:180px;display:flex;flex-direction:column;justify-content:space-between}
+.game-symbol{font-size:37px;color:var(--gold)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px}
+.table{width:100%;border-collapse:collapse;font-size:13px}.table th{text-align:left;color:var(--muted);font-weight:500;padding:11px 8px;border-bottom:1px solid var(--line)}.table td{padding:13px 8px;border-bottom:1px solid #302318}
+.notice{border:1px solid #594329;background:#1b140d;padding:12px 14px;border-radius:7px;color:#cdb98e;font-size:12px;line-height:1.5;margin-bottom:17px}
+.toast{position:fixed;bottom:20px;right:20px;background:#21180e;border:1px solid var(--gold);color:var(--gold2);padding:13px 17px;border-radius:7px;box-shadow:0 8px 35px #0009;display:none;z-index:10}
+.admin-tag{color:#e6c37d;border:1px solid #76562e;border-radius:20px;padding:5px 9px;font-size:10px}
+.empty{padding:28px;text-align:center;color:var(--muted);font:italic 18px 'Cormorant Garamond'}
+.poker-cards{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:18px 0}.playing-card{width:78px;height:112px;border-radius:9px;background:#eee8dc;border:2px solid #c8bda9;color:#18120d;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:9px;font:700 23px Georgia;box-shadow:0 5px 14px #0006;transition:.15s}.playing-card b{font-size:27px;align-self:flex-end}.playing-card.red{color:#a52d2d}.playing-card.chosen{transform:translateY(-10px);outline:2px solid var(--gold);box-shadow:0 8px 20px #c6a15b55}.playing-card:focus-visible{outline:3px solid var(--gold)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:20;padding:15px}.modal.show{display:grid}.modal-box{background:#15100c;border:1px solid var(--gold);border-radius:12px;padding:24px;max-width:430px;width:100%;box-shadow:0 20px 80px #000}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{height:auto;position:relative;padding:12px 14px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:5px 0 10px;margin:0 0 10px}.brand-mark{display:none}.brand-name{font-size:19px}.brand-tag{margin-top:3px}.nav{display:flex;overflow-x:auto;gap:5px}.nav button{white-space:nowrap;padding:9px 11px;font-size:12px}.sidebar-foot{display:none}.main{padding:18px 15px 40px}.hero{min-height:155px}.stats{grid-template-columns:1fr 1fr}.two,.bottom{grid-template-columns:1fr}.cards-3{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.stats{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:12px;min-height:80px}.stat-value{font-size:23px}.stat-icon{font-size:21px}.card{padding:15px}.cards-3{grid-template-columns:1fr}.hero:after{font-size:180px;right:-5%}.subtitle{font-size:20px}.form-grid{grid-template-columns:1fr}.challenge{align-items:flex-start}.challenge-art{width:65px;height:65px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark"><span>H</span></div><div class="brand-name">PURO HUMO</div><div class="brand-tag">UNA INSTITUCIÓN COMPLETAMENTE INNECESARIA</div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span> Inicio</button>
+    <button data-page="retos"><span class="ico">⚑</span> Retos</button>
+    <button data-page="subastas"><span class="ico">⚖</span> Subastas</button>
+    <button data-page="salon"><span class="ico">♠</span> Salón de estrategias</button>
+    <button data-page="historial"><span class="ico">▤</span> Historial</button>
+    <button data-page="admin"><span class="ico">✥</span> Administración</button>
+  </nav>
+  <div class="sidebar-foot">EVENTO HAVEN<br><span style="color:var(--gold)">DOS DÍAS DE GLORIA DUDOSA</span></div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <select id="groupSelect" style="width:auto;max-width:190px"><option>Los Improvisados</option><option>Los Innovadores</option><option>Sin Presupuesto</option></select>
+    <div class="pill">✦ <strong id="topPoints">1.250</strong> humos</div>
+    <span class="pill" id="rolePill">Miembro distinguido</span>
+  </div>
+
+  <section class="section active" id="home">
+    <div class="hero"><div><div class="eyebrow">Acceso concedido · Haven</div><h1>PURO HUMO</h1><div class="subtitle">Bienvenido, distinguido individuo.</div><div class="small-note">La seriedad es opcional. Las consecuencias, no.</div></div></div>
+    <div class="grid stats">
+      <div class="card stat"><div class="stat-icon">▤</div><div><div class="stat-label">Su patrimonio imaginario</div><div class="stat-value" id="homePoints">1.250</div></div></div>
+      <div class="card stat"><div class="stat-icon">♛</div><div><div class="stat-label">Su posición social</div><div class="stat-value">#2</div></div></div>
+      <div class="card stat"><div class="stat-icon">⌛</div><div><div class="stat-label">Tiempo de evento</div><div class="stat-value" style="font-size:23px">2 días</div></div></div>
+    </div>
+    <div class="grid two">
+      <div class="card"><div class="card-head"><h2>✧ Encargos de dudosa importancia</h2><button class="btn secondary" onclick="go('retos')">Ver todos →</button></div>
+        <div class="challenge"><div class="challenge-art">♜</div><div><h3>Caza recompensa</h3><div class="muted">Complete el encargo. No haga preguntas innecesarias.</div><div class="reward">✦ +300 humos</div><button class="btn" onclick="claimChallenge()">Aceptar el destino</button></div></div>
+      </div>
+      <div class="card auction-art"><div style="position:relative;z-index:1;max-width:65%"><div class="eyebrow">Próximamente</div><h2 style="font-size:27px">Casa de subastas</h2><p class="muted">Las ventajas esperan. Su prudencia, no tanto.</p><span class="status">● Cerrada por decisión de gente importante</span><p><button class="btn secondary" onclick="go('subastas')">Inspeccionar la sala →</button></p></div></div>
+    </div>
+    <div class="grid bottom">
+      <div class="card"><div class="card-head"><h2>♠ Salón de estrategias</h2><span class="status">Disponible</span></div><div style="font-size:45px;color:var(--gold);margin:8px 0">♠ ♥ ♦ ♣</div><p class="muted">Cartas, combinaciones y decisiones. La suerte no administra esta institución.</p><button class="btn" onclick="go('salon')">Examinar las combinaciones →</button></div>
+      <div class="card"><div class="card-head"><h2>▤ Últimos movimientos</h2><button class="btn secondary" onclick="go('historial')">Ver más →</button></div><div id="homeHistory"></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="retos">
+    <div class="eyebrow">Departamento de asuntos innecesarios</div><div class="page-title">Retos y recompensas</div><div class="page-intro">Grandes misiones. Recompensas discutibles.</div>
+    <div class="notice">Los encargos disponibles son publicados por la administración. Completar un reto no acredita puntos automáticamente en esta demostración.</div>
+    <div class="grid cards-3">
+      <div class="card game-card"><div><div class="game-symbol">♜</div><h2>Caza recompensa</h2><p class="muted">Complete el desafío de la sala de estrategia. La gloria es temporal.</p></div><div><div class="reward">+300 humos</div><button class="btn" onclick="claimChallenge()">Solicitar participación</button></div></div>
+      <div class="card game-card"><div><div class="game-symbol">✧</div><h2>El favor del consejo</h2><p class="muted">Una tarea misteriosa. El consejo niega tener relación con ella.</p></div><div><div class="reward">+150 humos</div><button class="btn secondary" onclick="toast('Este encargo aún no ha sido autorizado.')">Consultar disponibilidad</button></div></div>
+      <div class="card game-card"><div><div class="game-symbol">♛</div><h2>Prestigio dudoso</h2><p class="muted">Demuestre una habilidad que nadie había solicitado.</p></div><div><div class="reward">+500 humos</div><button class="btn secondary" onclick="toast('La junta está deliberando. Lleva tres cafés.')">Presentar candidatura</button></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="subastas">
+    <div class="eyebrow">Departamento de adquisiciones cuestionables</div><div class="page-title">Casa de subastas</div><div class="page-intro">Ventajas temporales. Precios desproporcionados. Dignidad opcional.</div>
+    <div class="card"><div class="card-head"><h2>Subasta principal</h2><span class="status" id="auctionStatus">● Cerrada</span></div><div class="auction-art" style="min-height:220px;border:1px solid var(--line);border-radius:8px"><div style="z-index:1;max-width:65%"><h2 style="font-size:30px" id="auctionPrizeName">El gran privilegio</h2><p class="muted" id="auctionPrizeDescription">Una ventaja interna del evento, cuidadosamente tasada por personas con demasiado tiempo libre.</p><div class="reward">Oferta actual: <span id="currentBid">—</span></div><div class="row"><input class="field" id="bidAmount" type="number" min="1" placeholder="Su oferta en humos"><button class="btn" onclick="placeBid()">Presentar oferta</button></div></div></div><p class="muted" id="auctionMessage">La sala permanece cerrada. La administración está ocupada pareciendo importante.</p></div>
+  </section>
+
+  <section class="section" id="salon">
+    <div class="eyebrow">Departamento de combinaciones y asuntos menores</div><div class="page-title">El salón de estrategias</div><div class="page-intro">La fortuna no será consultada. Ya tiene suficientes responsabilidades.</div>
+    <div class="notice">Reto de habilidad: examine las siete cartas y seleccione exactamente cinco para formar la mejor combinación posible. No se apuesta ni se pierden humos. En esta demo, cada grupo puede reclamar la recompensa una sola vez.</div>
+    <div class="card">
+      <div class="card-head"><h2>✧ La mesa de combinaciones</h2><span class="status">Reto abierto</span></div>
+      <p class="muted">Seleccione cinco cartas. Puede cambiar su selección antes de presentar la jugada.</p>
+      <div id="cardPuzzle" class="poker-cards"></div>
+      <div class="row" style="margin-top:16px;align-items:center"><div><div class="muted">Cartas seleccionadas</div><strong id="selectedCount">0 / 5</strong></div><button class="btn" id="submitHand" onclick="submitHand()">Presentar combinación</button></div>
+      <div id="handResult" class="notice" style="margin-top:16px;display:none"></div>
+    </div>
+    <div class="card" style="margin-top:17px"><h2>Reglas de la mesa</h2><p class="muted">La combinación se evalúa por su composición. La recompensa es fija y se acredita una sola vez por grupo. Los puntos no se arriesgan, no se compran y no se sortean.</p></div>
+  </section>
+
+  <section class="section" id="historial">
+    <div class="eyebrow">Archivo central</div><div class="page-title">Libro de movimientos</div><div class="page-intro">Todo queda registrado. Incluso sus errores.</div>
+    <div class="card"><div id="fullHistory"></div></div>
+  </section>
+
+  <section class="section" id="admin">
+    <div class="eyebrow">Acceso restringido</div><div class="page-title">Administración</div><div class="page-intro">El poder corrompe. Este panel también.</div>
+    <div class="notice"><strong>Modo demostración:</strong> este panel no está protegido por un servidor ni por contraseña real. Los cambios se guardan solo en este navegador. Para el evento real, cada acción deberá validarse en un backend.</div>
+    <div class="grid two">
+      <div class="card"><h2>Asignar o retirar humos</h2><p class="muted">La generosidad institucional tiene límites.</p><label>Grupo</label><select id="adminGroup"><option>Los Improvisados</option><option>Los Innovadores</option><option>Sin Presupuesto</option></select><label style="margin-top:12px">Cantidad</label><input class="field" id="adminAmount" type="number" min="1" placeholder="Ej. 200"><label style="margin-top:12px">Motivo</label><input class="field" id="adminReason" placeholder="Por razones que no explicaremos"><div class="row" style="margin-top:14px"><button class="btn" onclick="adminAdjust(1)">Asignar</button><button class="btn danger" onclick="adminAdjust(-1)">Retirar</button></div></div>
+      <div class="card"><h2>Control de subasta</h2><p class="muted">Publique una ventaja concreta del evento. La adjudicación se confirma al cerrar la subasta.</p><label>Nombre de la ventaja</label><input class="field" id="prizeName" value="15 minutos de intervención del staff"><label style="margin-top:12px">Descripción y condiciones</label><textarea class="field" id="prizeDescription" rows="3" style="resize:vertical">Un miembro del staff podrá intervenir en el juego del grupo durante 15 minutos, dentro de las reglas del evento.</textarea><label style="margin-top:12px">Oferta inicial</label><input class="field" id="startBid" type="number" min="1" value="100"><button class="btn" style="margin-top:14px;width:100%" onclick="toggleAuction()">Abrir / cerrar y adjudicar</button><p class="muted" id="adminAuctionText">Estado: cerrada</p></div>
+    </div>
+    <div class="card" style="margin-top:17px"><div class="card-head"><h2>Resumen de casas</h2><button class="btn secondary" onclick="resetDemo()">Restablecer demo</button></div><div id="adminGroups"></div></div>
+  </section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="modal-box"><div class="eyebrow">Notificación oficial</div><h2 id="modalTitle" style="margin:12px 0">Aviso</h2><p class="muted" id="modalText"></p><button class="btn" onclick="closeModal()">Entendido, supongo</button></div></div>
+<script>
+const initial={groups:{"Los Improvisados":1250,"Los Innovadores":980,"Sin Presupuesto":700},current:"Los Improvisados",history:[],auction:{open:false,name:"15 minutos de intervención del staff",description:"Un miembro del staff podrá intervenir en el juego del grupo durante 15 minutos, dentro de las reglas del evento.",bid:100,leader:null},claimedChallenges:{},cardRewards:{}};
+let state=JSON.parse(localStorage.getItem('ph-demo-state-v2')||'null')||JSON.parse(JSON.stringify(initial));
+state.claimedChallenges ||= {}; state.cardRewards ||= {}; state.auction.description ||= initial.auction.description;
+function save(){localStorage.setItem('ph-demo-state-v2',JSON.stringify(state));render()}
+function points(){return state.groups[state.current]||0}
+function fmt(n){return Number(n).toLocaleString('es-CO')}
+function toast(t){let el=document.getElementById('toast');el.textContent=t;el.style.display='block';setTimeout(()=>el.style.display='none',2600)}
+function modal(t,m){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=m;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function go(p){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===p));window.scrollTo({top:0,behavior:'smooth'});render()}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.getElementById('groupSelect').addEventListener('change',e=>{state.current=e.target.value;save()});
+function addHistory(group,amount,desc){state.history.unshift({group,amount,desc,when:new Date().toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'})})}
+function claimChallenge(){if(state.claimedChallenges[state.current]){toast('Este grupo ya solicitó este encargo. La burocracia tiene memoria.');return}state.claimedChallenges[state.current]=true;addHistory(state.current,0,'Solicitud de reto enviada; pendiente de validación');save();modal('Solicitud recibida','El staff debe verificar el reto antes de acreditar los humos. No se han añadido puntos todavía.');}
+const puzzleCards=[{id:0,r:9,s:'♠',c:'black'},{id:1,r:10,s:'♠',c:'black'},{id:2,r:11,s:'♠',c:'black'},{id:3,r:12,s:'♠',c:'black'},{id:4,r:13,s:'♠',c:'black'},{id:5,r:4,s:'♥',c:'red'},{id:6,r:4,s:'♦',c:'red'}];
+let selectedCards=[];
+function cardLabel(r){return ({11:'J',12:'Q',13:'K',14:'A'})[r]||String(r)}
+function drawPuzzle(){const root=document.getElementById('cardPuzzle');if(!root)return;root.innerHTML=puzzleCards.map(c=>`<button class="playing-card ${c.c}" data-card="${c.id}" onclick="toggleCard(${c.id})"><span>${cardLabel(c.r)}</span><b>${c.s}</b></button>`).join('');updateSelection()}
+function toggleCard(id){if(selectedCards.includes(id))selectedCards=selectedCards.filter(x=>x!==id);else if(selectedCards.length<5)selectedCards.push(id);else toast('La mesa admite exactamente cinco cartas.');updateSelection()}
+function updateSelection(){document.querySelectorAll('.playing-card').forEach(el=>el.classList.toggle('chosen',selectedCards.includes(Number(el.dataset.card))));const n=document.getElementById('selectedCount');if(n)n.textContent=selectedCards.length+' / 5';const b=document.getElementById('submitHand');if(b)b.disabled=selectedCards.length!==5}
+function evaluateHand(cards){const vals=cards.map(x=>puzzleCards[x].r).sort((a,b)=>a-b);const suits=cards.map(x=>puzzleCards[x].s);const flush=suits.every(x=>x===suits[0]);const straight=vals.every((v,i)=>i===0||v===vals[i-1]+1);const counts={};vals.forEach(v=>counts[v]=(counts[v]||0)+1);const groups=Object.values(counts).sort((a,b)=>b-a);if(straight&&flush)return 'Escalera de color';if(groups[0]===4)return 'Póker';if(groups[0]===3&&groups[1]===2)return 'Full house';if(flush)return 'Color';if(straight)return 'Escalera';if(groups[0]===3)return 'Trío';if(groups[0]===2&&groups[1]===2)return 'Doble pareja';if(groups[0]===2)return 'Pareja';return 'Carta alta'}
+function submitHand(){if(selectedCards.length!==5){toast('Seleccione exactamente cinco cartas.');return}const result=evaluateHand(selectedCards);const out=document.getElementById('handResult');out.style.display='block';if(result==='Escalera de color'&&!state.cardRewards[state.current]){state.cardRewards[state.current]=true;state.groups[state.current]+=250;addHistory(state.current,250,'Recompensa por resolver la mesa de combinaciones');out.textContent='Combinación: '+result+'. Excelente lectura de la mesa. Se acreditaron 250 humos a su grupo.';save()}else if(state.cardRewards[state.current]){out.textContent='Combinación: '+result+'. Este grupo ya reclamó la recompensa de la mesa.'}else{out.textContent='Combinación: '+result+'. La combinación objetivo es una escalera de color. Reordene su estrategia e inténtelo de nuevo.'}}
+function adminAdjust(sign){let g=document.getElementById('adminGroup').value,a=Number(document.getElementById('adminAmount').value),r=document.getElementById('adminReason').value||'Decisión administrativa';if(!Number.isInteger(a)||a<1){toast('Cantidad inválida.');return}if(sign<0&&state.groups[g]<a){toast('Ese grupo no tiene tantos humos.');return}state.groups[g]+=sign*a;addHistory(g,sign*a,r);save();toast('Movimiento registrado en la demo.')}
+function toggleAuction(){if(!state.auction.open){const start=Number(document.getElementById('startBid').value);if(!Number.isInteger(start)||start<1){toast('La oferta inicial debe ser un número positivo.');return}state.auction.name=document.getElementById('prizeName').value||'Ventaja sin nombre';state.auction.description=document.getElementById('prizeDescription').value||'Ventaja interna del evento';state.auction.bid=start;state.auction.leader=null;state.auction.open=true;save();toast('La subasta ha abierto. Que comience la solemnidad.')}else{state.auction.open=false;if(state.auction.leader){const g=state.auction.leader;if(state.groups[g]>=state.auction.bid){state.groups[g]-=state.auction.bid;addHistory(g,-state.auction.bid,'Adjudicación: '+state.auction.name);modal('Adjudicación confirmada',g+' obtuvo «'+state.auction.name+'» por '+fmt(state.auction.bid)+' humos. El staff deberá coordinar la ventaja.')}else{modal('Adjudicación pendiente','El grupo líder ya no tiene saldo suficiente. La administración debe resolverlo manualmente.')}}else{modal('Subasta cerrada','No hubo ofertas. La ventaja seguirá esperando a alguien con iniciativa.')}save();toast('La subasta ha cerrado. La junta se retira.')}}
+function placeBid(){if(!state.auction.open){toast('La subasta está cerrada.');return}let b=Number(document.getElementById('bidAmount').value);if(!Number.isInteger(b)||b<=state.auction.bid){toast('La oferta debe superar la actual.');return}if(b>points()){toast('Su grupo no tiene saldo suficiente.');return}if(state.auction.leader===state.current){toast('Su grupo ya lidera. Espere otra oferta.');return}state.auction.bid=b;state.auction.leader=state.current;save();toast('Oferta registrada. El saldo se descuenta al adjudicar, no antes.')}
+function resetDemo(){if(confirm('¿Restablecer todos los datos locales de la demostración?')){localStorage.removeItem('ph-demo-state-v2');state=JSON.parse(JSON.stringify(initial));selectedCards=[];save();drawPuzzle();toast('La institución ha fingido que nada ocurrió.')}}
+function render(){let p=points();document.getElementById('topPoints').textContent=fmt(p);document.getElementById('homePoints').textContent=fmt(p);document.getElementById('groupSelect').value=state.current;document.getElementById('auctionStatus').textContent=state.auction.open?'● Abierta':'● Cerrada';document.getElementById('currentBid').textContent=state.auction.open?fmt(state.auction.bid)+' humos':'—';document.getElementById('auctionMessage').textContent=state.auction.open?'Ventaja: '+state.auction.name+'. Oferta líder: '+(state.auction.leader||'Nadie, por ahora')+'.':'La sala permanece cerrada. La administración está ocupada pareciendo importante.';document.getElementById('auctionPrizeName').textContent=state.auction.name;document.getElementById('auctionPrizeDescription').textContent=state.auction.description;document.getElementById('adminAuctionText').textContent='Estado: '+(state.auction.open?'abierta':'cerrada');
+let rows=state.history.slice(0,4).map(x=>`<div class="history-row"><span>${x.amount>=0?'✧':'⚖'}</span><span>${x.desc}<div class="muted">${x.group} · ${x.when}</div></span><b class="${x.amount>=0?'positive':'negative'}">${x.amount>0?'+':''}${fmt(x.amount)}</b></div>`).join('')||'<div class="empty">Ningún movimiento. Qué paz tan sospechosa.</div>';document.getElementById('homeHistory').innerHTML=rows;document.getElementById('fullHistory').innerHTML=state.history.map(x=>`<div class="history-row"><span>✧</span><span>${x.desc}<div class="muted">${x.group} · ${x.when}</div></span><b class="${x.amount>=0?'positive':'negative'}">${x.amount>0?'+':''}${fmt(x.amount)} humos</b></div>`).join('')||'<div class="empty">El libro está limpio. Por ahora.</div>';
+document.getElementById('adminGroups').innerHTML='<table class="table"><thead><tr><th>Casa</th><th>Saldo</th></tr></thead><tbody>'+Object.entries(state.groups).map(([g,v])=>`<tr><td>${g}</td><td>${fmt(v)} humos</td></tr>`).join('')+'</tbody></table>';
+}
+render();
+drawPuzzle();
+</script>
+</body>
+</html>
